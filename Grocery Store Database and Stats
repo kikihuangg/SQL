@@ -1,0 +1,33 @@
+CREATE TABLE my_store (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, aisle INTEGER, quantity INTEGER);
+
+INSERT INTO my_store VALUES (1, "Pasta", 3, 1, 10);
+INSERT INTO my_store VALUES (2, "Tomato Sauce", 2, 1, 10);
+INSERT INTO my_store VALUES (3, "Basil", 2, 2, 10);
+INSERT INTO my_store VALUES (4, "Oregano", 3, 2, 7);
+INSERT INTO my_store VALUES (5, "Salt", 2, 2, 10);
+INSERT INTO my_store VALUES (6, "Pepper", 2, 2, 10);
+INSERT INTO my_store VALUES (7, "Dish Soap",5,3,10);
+INSERT INTO my_store VALUES (8,"Detergent",5,3,5);
+INSERT INTO my_store VALUES (9,"Mouse",30,4,5);
+INSERT INTO my_store VALUES (10,"Keyboard",50,4,5);
+INSERT INTO my_store VALUES (11,"Water",2,5,20);
+INSERT INTO my_store VALUES (12,"Soda",10,5,20);
+INSERT INTO my_store VALUES (13,"Dog food",20,6,10);
+INSERT INTO my_store VALUES (14,"Cat food",20,6,10);
+INSERT INTO my_store VALUES (15,"Bird food",15,6,10);
+SELECT * FROM my_store;
+
+--display the database ordered by price. 
+SELECT * FROM my_store
+ORDER BY price desc; 
+
+--what is the avg price of items in aisle 5? 
+SELECT AVG(price) "avg aisle 5 item price"
+FROM my_store
+where aisle='5'; 
+
+--what are the top 5 items with the most quantity? 
+SELECT item, price, quantity
+FROM my_store
+order by quantity desc
+limit 5; 
