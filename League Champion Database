@@ -1,0 +1,63 @@
+/** Creating Table **/
+CREATE TABLE league_champions (
+    /* Auto ID, name of champion, type of champion, and win rate of champion*/
+    id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, champion_lane TEXT, win_rate REAL);
+
+
+
+/** Creating Rows **/
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Aatrox", "Top", 50.41);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Darius", "Top",50.86);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Mordekaiser", "Top", 51.07);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Teemo", "Top",51.96);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Singed", "Top",52.30);
+
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Kayn", "Jungle",50.97);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Fiddlesticks", "Jungle",53.09);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Trundle", "Jungle",52.21);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Udyr", "Jungle",49.41);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Master_Yi", "Jungle",51.68);
+
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Zed", "Middle", 51.53);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Viktor", "Middle", 51.04);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Swain", "Middle", 52.62);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Sylas", "Middle", 50.38);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Vex", "Middle", 51.72);
+
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Sivir", "Bottom", 51.49);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Caitlyn", "Bottom", 50.78);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Miss Fortune", "Bottom", 51.92);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Twitch", "Bottom", 51.31);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Jhin", "Bottom", 50.42);
+
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Janna", "Support", 52.15);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Taric", "Support", 53.60);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Zyra", "Support", 52.35);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Soraka", "Support", 51.76);
+INSERT INTO league_champions (name, champion_lane, win_rate) VALUES ("Amumu", "Support", 51.83);
+
+
+/** Creating table of my favorite champions **/
+CREATE TABLE favorites (id INTEGER);
+
+INSERT into favorites VALUES (1);
+INSERT into favorites VALUES (17);
+INSERT into favorites VALUES (23);
+INSERT into favorites VALUES (24);
+INSERT into favorites VALUES (8);
+INSERT into favorites VALUES (16);
+INSERT into favorites VALUES (3);
+INSERT into favorites VALUES (27);
+INSERT into favorites VALUES (22);
+
+SELECT league_champions.name AS "My Favorite Champs"
+, league_champions.win_rate AS "Win Rate"
+, league_champions.champion_lane AS "Lane" 
+    From league_champions 
+    JOIN favorites 
+    ON favorites.id = league_champions.id; 
+    
+/** Champs with the highest win rates **/
+SELECT name, win_rate 
+    FROM league_champions 
+    ORDER BY win_rate DESC LIMIT 10 
