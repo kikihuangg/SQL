@@ -1,0 +1,62 @@
+/** Creating Table**/
+CREATE TABLE country_data(id INTEGER PRIMARY KEY AUTOINCREMENT, country TEXT, population INTEGER, vaccinated_population REAL, fertility_rate REAL, male_population_percentage REAL, female_population_percentage REAL);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Bangladesh", 180000000, 77.00, 2.00, 50.60, 49.40);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("India", 1276267000, 73.00, 2.20, 51.70, 48.30);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("China", 1376049000, 91.27, 1.70, 51.08, 48.20);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Paksitan", 213604900, 60.06, 3.50, 51.40, 48.60);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Nepal", 13760490, 84.64, 1.90, 48.40, 51.60);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Bhutan", 8876090, 89.40, 2.00, 53.70, 46.30);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Afghanistan", 10876090, 26.08, 4.50, 50.70, 49.30);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Indonesia", 260581100, 74.16, 2.30, 50.30, 49.70);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Brazil", 209567920, 86.93, 1.70, 49.20, 50.80);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Russia", 143439832, 57.27, 1.60, 46.10, 53.90);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Japan", 126323715, 83.50, 1.40, 48.70, 51.30);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Germany", 80682351, 77.64, 1.60, 49.10, 50.90);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("United Kingdom", 65111143, 79.89, 1.7,49.30, 50.70);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("United States", 324118787, 78.86, 1.70, 49.20, 50.80);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Iran", 80043146, NULL, 2.20, 50.30, 49.70);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Spain", 46064604, 86.95, 1.20, 49.40, 50.60);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Saudi Arabia", 32157974, NULL, 2.30, 57.50, 42.50);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Malaysia", 30751602, 83.66, 2.00, 48.50, 51.50);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Australia", 24309330, 86.49, 1.70, 49.80, 50.20);
+
+INSERT INTO country_data(country, population, vaccinated_population, fertility_rate, male_population_percentage, female_population_percentage) VALUES("Sri Lanka", 20810816, 78.57,2.20, 48.90, 51.10);
+
+
+/** Is the population majority vaccinated or minority vaccinated? What are the dominating genders in the country? **/
+SELECT country,
+    CASE
+        WHEN vaccinated_population < 60 AND vaccinated_population > 45 THEN "about_half"
+        WHEN vaccinated_population < 45 THEN "minority"
+        WHEN vaccinated_population > 55 THEN "majority"
+    END "population_vaccination_status",
+    
+    CASE 
+        WHEN male_population_percentage > female_population_percentage THEN "male"
+    ELSE "female" 
+    END "gender_majority"
+FROM country_data;
+    
+/** Instead of percentages, what are the actual number of people that have been vaccinated in each country? **/
+SELECT country, 
+ROUND(population*vaccinated_population*0.01) AS vaccinated_population_numbers
+FROM country_data;
