@@ -1,0 +1,106 @@
+/** For this SQL project, I have gone ahead and download a dataset called Chinook, which is a digital media store that includes tables for albums, artists, media tracks, invoices and customers.**/ 
+/** I then list a few sample questions to work on my SQL querying skills. **/
+
+
+
+/** Creating my table **/
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+
+/**1. What is the average danceability, popularity, and energy by artist (ordered by energy)?
+SELECT artist_name,
+       avg(danceability),
+       avg(popularity),
+       avg(energy)
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY avg(energy) DESC;
+
+
+
+/**2. Who are the top 10 artists based on popularity?
+SELECT artist_name,
+       avg(popularity)
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY avg(popularity) DESC
+LIMIT 10;
+
+
+
+/**3. What are the top 10 tracks based on popularity?
+SELECT artist_name, 
+       track_name, 
+       popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+
+
+/**4. What are the top 5 longest songs (also convert milliseconds to seconds)? 
+SELECT artist_name, 
+       track_name, 
+       (duration_ms/1000) as length_by_second
+FROM BIT_DB.Spotifydata
+ORDER BY length_by_second DESC
+LIMIT 10;
+
+
+
+/**5. How many songs have acousticness higher and lower than 0.02?
+SELECT SUM(
+         CASE WHEN acousticness > 0.02
+         THEN 1 ELSE 0 END) AS tracks_higher,
+       sum(
+         CASE WHEN acousticness < 0.02
+         THEN 1 ELSE 0 END) AS tracks_lower
+FROM BIT_DB.Spotifydata
+
+
+
+/**6. How do we categorize tracks into "Fast", "Medium", or "Slow" ratings based on their tempos?
+SELECT artist_name, track_name,
+    CASE 
+        WHEN tempo > 130 THEN 'Fast'
+        WHEN tempo > 100 THEN 'Medium'
+        ELSE 'Slow'
+        END AS tempo_speed
+        FROM BIT_DB.SpotifyData
+        ORDER BY tempo_speed DESC;
+        
+        
+        
+/**7. How many tracks can be categorized into "High", "Medium", or "Low" ratings based on their liveness?
+SELECT sum(
+          CASE WHEN liveness >= 0.3
+          THEN 1 ELSE 0 END) AS high_liveness,
+       sum(
+          CASE WHEN liveness > 0.1
+          AND liveness < 0.3
+          THEN 1 ELSE 0 END) AS medium_liveness,
+       sum(
+          CASE WHEN liveness <= 0.1
+          THEN 1 ELSE 0 END) AS low_liveness
+FROM BIT_DB.SpotifyData;
+
+
