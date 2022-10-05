@@ -1,5 +1,6 @@
-/** For this SQL project, I have gone ahead and download a dataset called Chinook, which is a digital media store that includes tables for albums, artists, media tracks, invoices and customers.**/ 
-/** I then list a few sample questions to work on my SQL querying skills. **/
+/** For this project, I downloaded Spotify data from Kaggle.**/
+/** Then I created a table to insert Spotify data into.**/
+/** Finally, I performed analytics on the data using SQL. **/
 
 
 
